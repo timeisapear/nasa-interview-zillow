@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def join_zillow_to_svi(zillow_path, svi_path, zip_to_county_path):
+def join_zillow_to_svi(zillow_path, svi_path, zip_to_county_path, save=False):
     # Gather crosswalk
     zip_to_county = pd.read_csv(zip_to_county_path)
 
