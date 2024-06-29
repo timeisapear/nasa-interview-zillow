@@ -17,6 +17,7 @@ Use requests to get data from
 - Zillow
 - CDC
 - crosswalk? use geosync API?
+Crosswalk zip -> county code is in the first part of the geoid. Need to construct new column just for county.
 
 Save to CSV?/sqlite if time
 
@@ -31,5 +32,6 @@ Visualize it
 Normally incremental refresh (additive) would be desired for data refreshes, both for efficiency and runtime reasons. However, given that these datasets reside mostly in memory, full refreshes should be adequate in this analysis.
 
 ## Zillow CSVs vs API
-Normally would use API, especially as that is the direction of the Zillow data page. However, given constraints, let's start with the CSV. 
-Plus, with the /region endpoints that equate to counties, there are ~3000 counties so more efficient to get the aggregate data than query by county.
+Normally I would use Zillow's API, especially as that is the direction of the Zillow data page. However, I went to request an API token and it informed me it may take 10+ days to process, outside the due date of the deliverable.
+
+Plus, with the /region endpoints that equate to counties, there are ~3000 counties so it is more efficient to get the aggregate data than query by county.

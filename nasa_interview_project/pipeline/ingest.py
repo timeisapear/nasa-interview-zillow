@@ -24,7 +24,7 @@ def gather_cdc_svi():
 
 def construct_zip_to_county_crosswalk() -> str:
     params = {
-        "type": 11, # zip-county, 7 county to zip from https://www.huduser.gov/portal/dataset/uspszip-api.html
+        "type": "2", # zip-county, 7 county to zip from https://www.huduser.gov/portal/dataset/uspszip-api.html
         "query": "All"
     }
 
