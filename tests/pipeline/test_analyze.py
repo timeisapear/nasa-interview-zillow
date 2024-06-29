@@ -10,10 +10,12 @@ def make_file_path(filename):
 
 
 def test_join_zillow_to_svi():
-    status = join_zillow_to_svi(
+    joined = join_zillow_to_svi(
         zillow_path=make_file_path("zillow_new_home.csv"),
         svi_path=make_file_path("SVI_2022_US_county.csv"),
-        zip_to_county_path=make_file_path("zip_to_county.csv"),
+        zip_to_county_path=make_file_path("CountyCrossWalk_Zillow.csv"),
     )
 
-    assert status == "success"
+    assert set(["RegionID", "MetroRegionID_Zillow", "FIPS"]).issubset(
+        set(joined.columns)
+    )
