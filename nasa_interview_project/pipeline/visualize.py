@@ -7,7 +7,8 @@ from analyze import join_zillow_to_svi, MONTHS_COLUMNS
 from scipy.stats import linregress
 import holoviews as hv
 import numpy as np
-from nasa_interview_project.pipeline.helpers import make_file_path
+from pipeline.helpers import make_file_path, MONTHS_COLUMNS, HSTARTS_COL_NAME
+from pipeline.analyze import filter_data_on_dashboard
 
 pn.extension("tabulator")
 
@@ -85,19 +86,19 @@ date_window = pn.widgets.Select(
 )
 
 # Reactive data filter
-df = pn.rx(filter_data)(date_window=date_window)
+df = pn.rx(filter_data_on_dashboard)(date_window=date_window, source_data=source_data)
 count = df.rx.len()
-total_starts = df[DERIVED_FIELD].sum()
-avg_starts = df[DERIVED_FIELD].mean()
+total_starts = df[HSTARTS_COL_NAME].sum()
+avg_starts = df[HSTARTS_COL_NAME].mean()
 
 # Plot Data
 fig = df.hvplot.scatter(
     x="SVI_INDEX",
-    y=DERIVED_FIELD,
-    title="Housing Starts Per Existing Housing Units vs SVI",
-    ylabel="Housing Starts",
+    y=HSTARTS_COL_NAME,
+    title="New Construction Sold Per Existing Housing Units vs SVI",
+    ylabel="New Construction Sold",
     xlabel="SVI ranking",
-    hover_cols=["SVI_INDEX", DERIVED_FIELD, "RegionName"],
+    hover_cols=["SVI_INDEX", HSTARTS_COL_NAME, "RegionName"],
     logy=True,
     color=ACCENT,
 )
@@ -116,7 +117,7 @@ indicators = pn.FlexBox(
     ),
     pn.indicators.Number(
         value=total_starts,
-        name="Total Housing Starts / hu",
+        name="Total New Construction Sold / hu",
         format="{value:,.1f}",
         styles=styles,
     ),
