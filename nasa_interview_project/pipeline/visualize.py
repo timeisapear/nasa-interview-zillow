@@ -7,7 +7,7 @@ from analyze import join_zillow_to_svi, MONTHS_COLUMNS
 from scipy.stats import linregress
 import holoviews as hv
 import numpy as np
-from helpers import make_file_path
+from nasa_interview_project.pipeline.helpers import make_file_path
 
 pn.extension("tabulator")
 

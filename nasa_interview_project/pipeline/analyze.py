@@ -1,5 +1,5 @@
 import pandas as pd
-from helpers import make_file_path
+from nasa_interview_project.pipeline.helpers import make_file_path
 
 MONTHS_COLUMNS = [
     "All",  # This is a new column
