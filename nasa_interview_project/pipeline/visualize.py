@@ -6,8 +6,8 @@ import panel as pn
 from analyze import join_zillow_to_svi, MONTHS_COLUMNS
 from scipy.stats import linregress
 import holoviews as hv
-import os
 import numpy as np
+from helpers import make_file_path
 
 pn.extension("tabulator")
 
@@ -25,10 +25,6 @@ styles = {
 # @pn.cache()  # only download data once
 # def get_data():
 #     return pd.read_csv("https://assets.holoviz.org/panel/tutorials/turbines.csv.gz")
-
-
-def make_file_path(filename):
-    return os.path.join(os.path.dirname(__file__), f"../data/{filename}")
 
 
 def get_data():

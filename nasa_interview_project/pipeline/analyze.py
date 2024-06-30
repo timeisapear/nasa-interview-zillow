@@ -1,4 +1,5 @@
 import pandas as pd
+from helpers import make_file_path
 
 MONTHS_COLUMNS = [
     "All",  # This is a new column
@@ -94,4 +95,6 @@ def join_zillow_to_svi(zillow_path, svi_path, zip_to_county_path, save=False):
         zillow, zip_to_county, left_on="RegionID", right_on="MetroRegionID_Zillow"
     )
     joined = pd.merge(hydrated, svi, on="FIPS")  # FIPS = STCNTY
+    if save:
+        joined.to_csv(make_file_path("joined_zillow_svi.csv"))
     return joined
