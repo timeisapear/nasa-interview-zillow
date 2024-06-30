@@ -29,52 +29,11 @@ styles = {
 
 
 def get_data():
-    joined_data = join_zillow_to_svi(
-        zillow_path=make_file_path("zillow_new_home.csv"),
-        svi_path=make_file_path("SVI_2022_US_county.csv"),
-        zip_to_county_path=make_file_path("CountyCrossWalk_Zillow.csv"),
-    )
-
-    # Add up all the months columns into a sum
-    joined_data[MONTHS_COLUMNS[0]] = joined_data[MONTHS_COLUMNS[1:]].sum(axis=1)
+    joined_data = pd.read_csv(make_file_path("joined_zillow_svi.csv"))
     return joined_data
 
 
 source_data = get_data()
-
-
-def custom_mean(x):
-    return np.mean(x)
-
-
-def custom_aggregation(group, date_window):
-    return np.sum(group[date_window] / group["E_HU"])
-
-
-DERIVED_FIELD = "Housing_Starts_Per_Existing_Units"
-
-
-def filter_data(date_window):
-    group_by_column = "RegionName"
-
-    data = (
-        source_data.loc[
-            :, [group_by_column, "RPL_THEMES", "E_HU", date_window]
-        ]  # E_HU is estimated housing units, M_HU is Margin of Error
-        .groupby(group_by_column)
-        .apply(
-            lambda group: pd.Series(
-                {
-                    "SVI_INDEX": custom_mean(group["RPL_THEMES"]),
-                    DERIVED_FIELD: custom_aggregation(group, date_window),
-                }
-            )
-        )
-    )
-    # Ensure GroupColumn is set as the index
-    # data.index.name = group_by_column
-    return data
-
 
 # Filters
 

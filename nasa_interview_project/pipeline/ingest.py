@@ -53,3 +53,10 @@ def construct_zip_to_county_crosswalk() -> str:
         return zip_to_county_path
     except RequestException as e:
         print(traceback.format_exc(e))
+
+if __name__ == "__main__":
+    print("Running ingest...")
+    zillow_path = gather_zillow()
+    # The Zillow-native crosswalk was found to be a better resource than using the HUD crosswalk
+    crosswalk_path = gather_zillow_county_crosswalk()
+    print("Ingest complete!")
