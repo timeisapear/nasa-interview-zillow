@@ -20,14 +20,8 @@ styles = {
     "padding": "10px",
 }
 
+
 # Extract Data
-
-
-# @pn.cache()  # only download data once
-# def get_data():
-#     return pd.read_csv("https://assets.holoviz.org/panel/tutorials/turbines.csv.gz")
-
-
 def get_data():
     joined_data = pd.read_csv(make_file_path("joined_zillow_svi.csv"))
     return joined_data
