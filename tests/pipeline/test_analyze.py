@@ -9,7 +9,7 @@ def make_file_path(filename):
     return os.path.join(BASE_PATH, filename)
 
 
-# @pytest.mark.parametrize(["save", [True, False]])
+@pytest.mark.parametrize("save", [True, False])
 def test_join_zillow_to_svi(save):
     joined = join_zillow_to_svi(
         zillow_path=make_file_path("zillow_new_home.csv"),
