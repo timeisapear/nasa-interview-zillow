@@ -1,4 +1,5 @@
-# Code adapted from https://panel.holoviz.org/tutorials/basic/build_dashboard.html
+# Code adapted from https://panel.holoviz.org/tutorials/basic/build_dashboard.html, permitted under LICENSE:
+# https://github.com/holoviz/holoviz/blob/main/LICENSE.txt
 import hvplot.pandas
 import pandas as pd
 import panel as pn
@@ -98,53 +99,16 @@ fig = df.hvplot.scatter(
     x="SVI_INDEX",
     y=DERIVED_FIELD,
     title="Housing Starts Per Existing Housing Units vs SVI",
-    # rot=90,
     ylabel="Housing Starts",
     xlabel="SVI ranking",
-    # xlim=(min_year, max_year),
     hover_cols=["SVI_INDEX", DERIVED_FIELD, "RegionName"],
     logy=True,
     color=ACCENT,
 )
 
-# x = df.loc[:, ["SVI_INDEX"]].values
-# y = df.loc[:, [DERIVED_FIELD]].values
-
-# # Calculating linear regression
-# slope, intercept, r_value, p_value, std_err = linregress(x, y)
-# regression_line = slope * x + intercept
-
-# # Creating a linear regression line plot
-# line_plot = hv.Curve((x, regression_line), "SVI_INDEX", DERIVED_FIELD).opts(color="red")
-
-# # Combine the scatter plot and the regression line plot
-# combined_plot = fig * line_plot
-
-# # Adding R² value to the plot
-# r_squared_text = hv.Text(
-#     x.max(),
-#     y.max(),
-#     f"R² = {r_value**2:.2f}",
-#     halign="right",
-# )
-
-# # Combine the plot and the text
-# final_plot = combined_plot * r_squared_text
-
 final_plot = fig
 
-# final_plot = fig * hv.Slope.from_scatter(fig)
-
-# final_plot.opts(
-#     title="Scatter Plot with Linear Regression and R²",
-#     xlabel="PercentileColumn1",
-#     ylabel="PercentileColumn2",
-#     height=400,
-#     width=600,
-# )
-
 # Display Data
-
 image = pn.pane.JPG("https://apps.hud.gov/images/fheo200.tif")
 
 indicators = pn.FlexBox(

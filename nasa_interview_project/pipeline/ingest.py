@@ -22,7 +22,7 @@ def gather_zillow():
 
 
 def gather_cdc_svi():
-    # This is hard-coded for now until the URL path is found (had to click button)
+    # This is hard-coded for now until the URL path is found (had to click button, could use Selenium etc. if no other option)
     pass
 
 
