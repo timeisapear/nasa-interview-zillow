@@ -51,6 +51,7 @@ fig = df.hvplot.scatter(
     title="New Construction Sold Per Existing Housing Units vs SVI",
     ylabel="New Construction Sold",
     xlabel="SVI ranking",
+    ylim=(0, None),
     hover_cols=["SVI_INDEX", HSTARTS_COL_NAME, "RegionName"],
     logy=True,
     color=ACCENT,
@@ -64,20 +65,20 @@ image = pn.pane.JPG("https://apps.hud.gov/images/fheo200.tif")
 indicators = pn.FlexBox(
     pn.indicators.Number(
         value=count,
-        name="Number of Geographic Regions",
+        name="Geographic Regions",
         format="{value:,.0f}",
         styles=styles,
     ),
     pn.indicators.Number(
         value=total_starts,
-        name="Total New Construction Sold / hu",
+        name="Sum House Starts / hu",
         format="{value:,.1f}",
         styles=styles,
     ),
     pn.indicators.Number(
         value=avg_starts,
         name="Avg. House Starts / hu",
-        format="{value:,.1f}",
+        format="{value:,.5f}",
         styles=styles,
     ),
 )
