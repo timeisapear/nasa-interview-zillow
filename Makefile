@@ -10,10 +10,10 @@ visualize_file=nasa_interview_project/pipeline/visualize.py
 all: visualize
 
 ingest: 
-	python $(ingest_file)
+	python3 $(ingest_file)
 
 analyze: ingest $(analyze_file)
-	python $(analyze_file)
+	python3 $(analyze_file)
 
 visualize: analyze $(visualize_file)
 	@echo "Running visualization script..."
@@ -26,5 +26,8 @@ clean:
 
 test:
 	pytest tests/
+
+generate-requirements:
+	poetry export --without-hashes --format=requirements.txt > requirements.txt
 
 .PHONY: all ingest analyze visualize clean
