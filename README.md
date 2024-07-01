@@ -19,7 +19,7 @@ docker-compose -f docker/docker-compose.yml up
 open http://[local-machine-ip]:7860/visualize
 ```
 
-## Publically accessible self-hosted link
+## Publicly accessible self-hosted link
 [https://nasa.tisap.net/visualize](https://nasa.tisap.net/visualize)
 
 Since I already had a personal website hosted on my LAN-linux box, I just added a 
