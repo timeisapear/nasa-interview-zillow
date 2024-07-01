@@ -1,12 +1,12 @@
 FROM python:3.12
 
-WORKDIR /code
+RUN mkdir /packages
 
-COPY ../requirements.txt /code/requirements.txt
+COPY ../requirements.txt /packages/requirements.txt
 RUN python3 -m pip install --no-cache-dir --upgrade pip
-RUN python3 -m pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN python3 -m pip install --no-cache-dir --upgrade -r /packages/requirements.txt
 
-COPY . .
+WORKDIR /
 
 RUN mkdir /.cache
 RUN chmod 777 /.cache

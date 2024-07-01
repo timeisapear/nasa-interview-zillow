@@ -8,19 +8,20 @@ services:
     ports:
       - "7860:7860"
     volumes:
-      - ../nasa_interview_project:/code
-      - ../Makefile:/code/Makefile
+      - ../nasa_interview_project:/nasa_interview_project
     environment:
-      - PYTHONPATH=/code/
-    command: ["panel", "serve", "/code/pipeline/visualize.py", "--address", "0.0.0.0", "--port", "7860",  "--allow-websocket-origin", "*", "--num-procs", "2", "--num-threads", "0"]
+      - PYTHONPATH=/nasa_interview_project/
+    command: ["panel", "serve", "/nasa_interview_project/pipeline/visualize.py", "--address", "0.0.0.0", "--port", "7860",  "--allow-websocket-origin", "*", "--num-procs", "2", "--num-threads", "0"]
+    depends_on:
+      - run_pipeline
 
   run_pipeline:
     build:
       context: ../
       dockerfile: Dockerfile
     volumes:
-      - ../nasa_interview_project:/code
-      - ../Makefile:/code/Makefile
+      - ../nasa_interview_project:/nasa_interview_project
+      - ../Makefile:/Makefile
     environment:
-      - PYTHONPATH=/code/
-    command: ["make", "analyze"]
+      - PYTHONPATH=/nasa_interview_project/
+    command: sh -c "while true; do make analyze; echo 'Sleeping 60 seconds'; sleep 60; done"
