@@ -1,37 +1,36 @@
-# What
+## Run instructions
+1. Clone repo:
+```sh
+git clone https://github.com/timeisapear/nasa-interview-zillow
+```
 
-Inspect Zillow data for correlations in conjunction with CDC data to determine whether Social Vulnerability Index informs negative outcomes across Zillow datasets
+2. Enter folder:
+```sh
+cd nasa-interview-zillow
+```
 
-Some thoughts on questions:
+3. Execute docker-compose (Ideally using Rancher)
+```sh
+docker-compose -f docker/docker-compose.yml up
+```
 
-Does SVR correlate with more vulnerable type of housing that does worse in natural disasters? (Would need tornado/hurricane data etc.)
-Are new construction sales concentrated more in 
-
-# Why
-
-To provide a project to display skills in software development, data engineering and communication. Any derived insights would be also be interesting in and of themselves.
-
-# How
-
-Use requests to get data from
-- Zillow
-- CDC
-- crosswalk? use geosync API?
-Crosswalk zip -> county code is in the first part of the geoid. Need to construct new column just for county.
-
-Save to CSV?/sqlite if time
-
-Use pandas to join the data, bucket Zillow geocodes with SVI data
-
-Visualize it
-- Seaborn/Plotly?
+4. Navigate to dashboard on browser
+```sh
+open http://[local-machine-ip]:7860/visualize
+```
 
 
-# Trade-offs
-## Incremental vs Full-refresh
+## Trade-offs and Limitations
+Most architecture trade-offs are discussed in executive summary, but below are very specific one-off thoughts as development progressed
+
+### Incremental vs Full-refresh
 Normally incremental refresh (additive) would be desired for data refreshes, both for efficiency and runtime reasons. However, given that these datasets reside mostly in memory, full refreshes should be adequate in this analysis.
 
-## Zillow CSVs vs API
-Normally I would use Zillow's API, especially as that is the direction of the Zillow data page. However, I went to request an API token and it informed me it may take 10+ days to process, outside the due date of the deliverable.
+### Zillow CSVs vs API
+Normally Zillow's API would be the preferred download mechanism of the data, especially since Zillow itself directs developers to use that as opposed to the CSVs. However, the requesting the API token mechanism communicated it might take 10+ days to proces, outside the due date of the deliverable.
 
-Plus, with the /region endpoints that equate to counties, there are ~3000 counties so it is more efficient to get the aggregate data than query by county.
+Plus, given the /region endpoints that equate to counties, there are ~3000 USA counties so it is more efficient to get the aggregate CSV data than query by county individually.
+
+
+### CDC Data pre-downloaded
+The CDC SVI index data for 2022 is downloaded and pre-committed to the repo. Ideally this would be fetched dynamically, but the file is hidden behind a "Download" button and its GET path was not easily ascertained even after time spent in the Chrome developer window. Given more time, a brute-force approach of Selenium automation to click the button and download it would be one solution.
