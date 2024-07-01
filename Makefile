@@ -21,8 +21,7 @@ visualize: analyze $(visualize_file)
 
 clean:
 	@echo "Cleaning up..."
-	# Add any cleanup commands here
-	# e.g., rm -f *.o
+	rm nasa_interview_project/data/CountyCrossWalk_Zillow.csv nasa_interview_project/data/joined_zillow_svi.csv nasa_interview_project/data/zillow_new_home.csv
 
 test:
 	pytest tests/
