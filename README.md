@@ -19,6 +19,16 @@ docker-compose -f docker/docker-compose.yml up
 open http://[local-machine-ip]:7860/visualize
 ```
 
+## Publically accessible self-hosted link
+[https://nasa.tisap.net/visualize](https://nasa.tisap.net/visualize)
+
+Since I already had a personal website hosted on my LAN-linux box, I just added a 
+config to my nginx and a CNAME record on Cloudflare for my personal tisap.net domain.
+
+Briefly, the CNAME record (nasa.tisap.net) is proxied through Cloudflare for some protection, then hits my home router which VPS forwards the 443 port to my local Linux NUC. Then nginx locally handles the proxying between my other site (climaski.com) and this current dashboard which docker-compose is running on port 7860.
+
+It can be available indefinitely at minimal additional cost to me.
+
 
 ## Trade-offs and Limitations
 Most architecture trade-offs are discussed in the executive summary but very specific one-off thoughts were recorded below as development progressed
